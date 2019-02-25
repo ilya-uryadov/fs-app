@@ -1,15 +1,19 @@
+const config = require('dotenv').config();
+//console.log(config.parsed); // persing env params
+
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
 
 //db connect params
-const user= 'db_user';
-const key = '3141592';
-const authMechanism = 'DEFAULT';
+const user= process.env.DB_USER; 
+const key = process.env.DB_KEY; 
+const authMechanism = process.env.DB_AUTH;
+const db_path = process.env.DB_PATH; 
 
 // onnection URL
-const url = `mongodb+srv://${user}:${key}@cluster0-1612d.mongodb.net/test?retryWrites=true?authMechanism=${authMechanism}`;
+const url = `mongodb+srv://${user}:${key}@${db_path}?retryWrites=true?authMechanism=${authMechanism}`;
 
 //start db connect
 mongoose.connect(url,{useNewUrlParser:true})
