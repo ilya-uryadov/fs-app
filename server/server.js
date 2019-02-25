@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false})); //encoding of url
 app.use(morgan('dev')); //logging in dev mode
 app.use('/api/records', require('./routes/router')); // start point of routing 
+app.use('/', express.static(path.join(__dirname, '../dist')));
 
 //start app server
 app.listen(app.get('port'), ()=> {
