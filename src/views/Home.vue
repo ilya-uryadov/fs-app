@@ -84,25 +84,34 @@
 
 
 <script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
+  import axios from 'axios';
 
-export default {
-  name: 'home',
-  data: function() {
-    return {
-      name:'',
-      email:'',
-      address:'',
-      gender:'',
+  export default {
+    name: 'home',
+    data: function() {
+      return {
+        name:'',
+        email:'',
+        address:'',
+        gender:'',
+      }
+    },
+    methods: {
+      async sendData() {
+        await axios ({
+          url:'http://localhost:3000/api/records',
+          method: 'post',
+          data: {
+              name: this.name,
+              email: this.email,
+              address: this.address,
+              gender: this.gender
+          } 
+        });
+        this.$router.push('thanks');
+      }
     }
-  },
-  methods: {
-    sendData() {
-      console.log(this.name, this.email, this.address, this.gender);
-    }
-  }
 
  
-}
+  }
 </script>
