@@ -8,12 +8,15 @@ const config = require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 router.get('/', async (req, res) => {
+    console.log(`requested 'get /' params: ${req.parsed}`);
     res.json(await Record.find())
 });
 
 router.get(':id', async (req, res) => {
+    console.log(`requested 'get /:id' params.id: ${req.params.id}`);
     res.json(await Record.findById(req.params.id))
 });
+
 
 
 router.post('/', async (req,res) => {

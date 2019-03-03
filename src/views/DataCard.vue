@@ -51,7 +51,8 @@
 <template>
   <div class="home">
     <md-card id="card-home">
-      <form @submit.prevent="sendData" id="main-form">
+      <form @submit.prevent="NextData" id="main-form">
+
         <md-input-container class="form-fontrol">
           <label>Name</label>
           <md-input v-model="name" id="name" type="text" />
@@ -74,9 +75,31 @@
         </div>
 
         <div class="send-wrapper">
-          <md-button type="summit" class="md-raised md-primary" id="send">Send</md-button>
+            <md-button type="summit" class="md-raised md-primary" id="send">Next</md-button>
         </div>
+
       </form>
+
+        <form @submit.prevent="findID" id="main-form">
+            <md-input-container class="form-fontrol">
+                <label>ID</label>
+            <md-input v-model="name" id="id" type="text" />
+            </md-input-container>
+
+            <div class="send-wrapper">
+                <md-button type="summit" class="md-raised md-primary" id="findId">Find by ID</md-button>
+                
+            </div>
+            
+        </form>
+        <form @submit.prevent="deleteID" id="main-form">
+            
+            <div class="send-wrapper">
+                <md-button type="summit" class="md-raised md-primary" id="deleteId">Detete by ID</md-button>
+            </div>
+            
+        </form>
+
     </md-card>
   </div>
 </template>
@@ -85,31 +108,41 @@
 
 <script>
   import axios from 'axios';
+  
 
   export default {
-      name: 'home',
+      name: 'findId',
 
-      data: function() {
+      data: () => {
         return {
-          name:'',
-          email:'',
-          address:'',
-          gender:'',
+          dataList: [],
+          isError: false,
+          state: ''
         }
       },
       methods: {
-        async sendData() {
-          await axios ({
-              url:'http://localhost:3000/api/records',
-              method: 'post',
-              data: {
-                  name: this.name,
-                  email: this.email,
-                  address: this.address,
-                  gender: this.gender
-              } 
-            });
-          this.$router.push('thanks');
+        async findId() {
+          try {
+            let response = await axios.get(`http://localhost:3000/api/records/${this.id}`);
+            this.dataList = response.data;
+          } 
+          catch (error) {
+            this.isError = true;
+          }
+
+          console.log('OK record has finded by id');
+        },
+
+        async deleteId() {
+          try {
+            let response = await axios.delete(`http://localhost:3000/api/records/${this.id}`);
+            this.state = response.data.state;
+          } 
+          catch (error) {
+            this.isError = true;
+          }
+
+          console.log('OK record has deleted by id');
         }
       }
     }

@@ -4,6 +4,16 @@
         <div class="logo">
             <img src="./assets/logo.png" alt="Logo-Vue" class="logo-vue">
         </div>
+        <div class="to-data">
+          <router-link to="/data">
+            <md-button class="md-rised md-primary">Go to data</md-button>
+          </router-link>
+        </div>
+        <div class="to-card">
+          <router-link to="/card">
+            <md-button class="md-rised md-primary">Card</md-button>
+          </router-link>
+        </div>
     </header>
     <main>
       <router-view/>
@@ -32,25 +42,14 @@
     margin: 0 auto;
   }
 
-/*
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-*/
+  .to-data {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
+  .to-card {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+  }
 </style>
