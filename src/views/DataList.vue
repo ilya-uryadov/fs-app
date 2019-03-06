@@ -24,9 +24,19 @@
             <md-table-cell md-numeric>{{ dataUser.address }}</md-table-cell>
             <md-table-cell md-numeric>{{ dataUser.gender }}</md-table-cell>
             <md-table-cell md-numeric>{{ dataUser._id }}</md-table-cell>
+            <md-button class="md-rised md-primary" @click="editRecordID(dataUser._id)">Edit</md-button>
+            <md-button class="md-rised md-primary" @click="deleteRecordID(dataUser._id)">delete</md-button>
+
+            
+
+
           </md-table-row>
+          
         </md-table-body>
       </md-table>
+      
+      
+
     </div>
     <div class="error-block" v-else>
       <md-card class="md-warn">
@@ -60,6 +70,7 @@
 
 <script>
 import axios from "axios";
+//import { async, try } from 'q';
 
 export default {
   name: "data",
@@ -71,6 +82,7 @@ export default {
   },
 
   methods: {
+    //refreshing data list
     async getDataList() {
       try {
         let response = await axios.get("http://localhost:3000/api/records");
@@ -79,7 +91,42 @@ export default {
       catch (error) {
         this.isError = true;
       }
-    }
+    },
+
+    //deleting record by ID
+    async deleteRecordID(id){
+        try {
+        let response = await axios.delete(`http://localhost:3000/api/records/${id}`);
+        console.log(`deleted record id:${id}`);
+
+        this.getDataList();
+        console.log('data list is refreshed');
+      }
+      catch(error){
+        this.isError = true;
+        console.error(error);
+      }
+    },
+
+    //opening edit form for the record by ID
+    async editRecordID(id){
+      //делаем видимой область формы редактирования рекорда
+      //заполняем поля редактирования значением поей рекорда
+      //скрываем кнопку edit. Открываем кнопку save
+
+
+    },
+    
+    //pushing record by  ID
+    async saveRecordID(id){
+      //отправляем асинхронно данные рекорда по конкретному id в БД 
+      //прячем поля редактирования
+      //скрываем кнопку save. Открываем кнопку edit (переключение видимости)
+      //рефрешим список рекордов
+
+
+    },
+
   }
 };
 </script>

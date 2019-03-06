@@ -75,7 +75,7 @@
         </div>
 
         <div class="send-wrapper">
-            <md-button type="summit" class="md-raised md-primary" id="send">Next</md-button>
+            <md-button type="summit" class="md-raised md-primary" id="send">Next -></md-button>
         </div>
 
       </form>
@@ -136,7 +136,7 @@
         async deleteId() {
           try {
             let response = await axios.delete(`http://localhost:3000/api/records/${this.id}`);
-            this.state = response.data.state;
+            this.state = response.data.stategit ;
           } 
           catch (error) {
             this.isError = true;
